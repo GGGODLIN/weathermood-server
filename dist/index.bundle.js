@@ -9551,6 +9551,7 @@ function listPosts() {
     if (searchText) url += '?searchText=' + searchText;
 
     console.log('Making GET request to: ' + url);
+    console.log('FUCK U');
 
     return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (res) {
         if (res.status !== 200) throw new Error('Unexpected response code: ' + res.status);
