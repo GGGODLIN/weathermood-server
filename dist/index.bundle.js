@@ -24581,6 +24581,14 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 
 
+// Develop server URL
+var todoBaseUrl = 'http://localhost:8080/api';
+
+// Staging server URL
+// const todoBaseUrl = 'http://weathermood-staging.us-west-2.elasticbeanstalk.com/api';
+
+// Production server URL
+//const todoBaseUrl = 'http://weathermood-6.us-west-2.elasticbeanstalk.com/api';
 
 var todoKey = 'todos';
 
@@ -24588,33 +24596,36 @@ function listTodos() {
     var unaccomplishedOnly = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
     var searchText = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
 
-    return new Promise(function (resolve, reject) {
-        setTimeout(function () {
-            resolve(_listTodos(unaccomplishedOnly, searchText));
-        }, 500);
+    var url = todoBaseUrl + '/todos';
+    if (searchText) url += '?searchText=' + searchText + '&accomplishTodo=' + unaccomplishedOnly;
+
+    console.log('Making GET request to: ' + url);
+    console.log('FUCK U');
+
+    return __WEBPACK_IMPORTED_MODULE_0_axios___default.a.get(url).then(function (res) {
+        if (res.status !== 200) throw new Error('Unexpected response code: ' + res.status);
+
+        return res.data;
     });
 }
 
 // Simulated server-side code
-function _listTodos() {
-    var unaccomplishedOnly = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-    var searchText = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-
-    var todoString = localStorage.getItem(todoKey);
-    var todos = todoString ? JSON.parse(todoString) : [];
-
-    if (unaccomplishedOnly) {
-        todos = todos.filter(function (t) {
-            return !t.doneTs;
-        });
-    }
-    if (searchText) {
-        todos = todos.filter(function (t) {
-            return t.text.toLowerCase().indexOf(searchText.toLowerCase()) !== -1;
-        });
-    }
-    return todos;
-};
+// function _listTodos(unaccomplishedOnly = false, searchText = '') {
+//     let todoString = localStorage.getItem(todoKey);
+//     let todos = todoString ? JSON.parse(todoString) : [];
+//
+//     if (unaccomplishedOnly) {
+//         todos = todos.filter(t => {
+//             return !t.doneTs;
+//         });
+//     }
+//     if (searchText) {
+//         todos = todos.filter(t => {
+//             return t.text.toLowerCase().indexOf(searchText.toLowerCase()) !== -1;
+//         });
+//     }
+//     return todos;
+// };
 
 function createTodo(mood, text) {
     return new Promise(function (resolve, reject) {
