@@ -9536,13 +9536,13 @@ module.exports = function bind(fn, thisArg) {
 
 
 // Develop server URL
-// const postBaseUrl = 'http://localhost:8080/api';
+var postBaseUrl = 'http://localhost:8080/api';
 
 // Staging server URL
 // const postBaseUrl = 'http://weathermood-staging.us-west-2.elasticbeanstalk.com/api';
 
 // Production server URL
-var postBaseUrl = 'http://weathermood-6.us-west-2.elasticbeanstalk.com/api';
+//const postBaseUrl = 'http://weathermood-6.us-west-2.elasticbeanstalk.com/api';
 
 function listPosts() {
     var searchText = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
