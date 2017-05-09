@@ -7,11 +7,11 @@ const errorHandler = require('./middleware/error-handler.js');
 const app = express();
 
 //app.use(requestLogger);
-// app.use(express.static('dist', {
-//     setHeaders: (res, path, stat) => {
-//         res.set('Cache-Control', 'public, s-maxage=1');
-//     }
-// }));
+app.use(express.static('dist', {
+    setHeaders: (res, path, stat) => {
+        res.set('Cache-Control', 'public, s-maxage=1');
+    }
+}));
 app.use('/api', postRouter);
 app.get('/*', (req, res) => res.redirect('/'));
 app.use(errorHandler);
