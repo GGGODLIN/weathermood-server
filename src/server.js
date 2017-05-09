@@ -14,7 +14,7 @@ app.use(express.static('dist', {
     }
 }));
 app.use('/api', postRouter);
-app.use('/api', todoRouter);
+//app.use('/api', todoRouter);
 app.get('/*', (req, res) => res.redirect('/'));
 app.use(errorHandler);
 
