@@ -1,7 +1,7 @@
 const express = require('express');
 
 const postRouter = require('./routers/posts.js');
-const todoRouter = require('./routers/todos.js');
+//const todoRouter = require('./routers/todos.js');
 const requestLogger = require('./middleware/request-logger.js');
 const errorHandler = require('./middleware/error-handler.js');
 
